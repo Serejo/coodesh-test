@@ -26,7 +26,7 @@ $ npm run serve
 
 
 A aplicação pode ser acessada em [`localhost:8000`](http://localhost:8000).
-
+```
 
 ## 🧪 Tecnologias
 
@@ -35,7 +35,3 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Vue](https://vuejs.org/)
 - [Tailwindcss](https://tailwindcss.com)
 - [PostCss](https://postcss.org/)
-
-
-
-```
