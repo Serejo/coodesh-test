@@ -59,11 +59,27 @@
         />
       </div>
     </div>
+    <div>
+      <modal-article-component
+        :dialogArticle="dialogArticle"
+        :articleObj="articleDetails"
+        @closeDialog="closeDialog"
+      />
+    </div>
   </div>
 </template>
 <script>
+import ModalArticleComponent from "./ModalArticleComponent.vue";
 export default {
+  components: { ModalArticleComponent },
   name: "CardListComponentInverted",
+  data() {
+    return {
+      reRender: 0,
+      dialogArticle: false,
+      articleDetails: {},
+    };
+  },
   props: {
     articleObj: {
       type: Object,
@@ -77,6 +93,15 @@ export default {
         day: "2-digit",
         year: "numeric",
       });
+    },
+  },
+  methods: {
+    openDetailsArticle(articleObj) {
+      this.articleDetails = articleObj;
+      this.dialogArticle = true;
+    },
+    closeDialog() {
+      this.dialogArticle = false;
     },
   },
 };

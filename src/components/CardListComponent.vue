@@ -59,15 +59,41 @@
         </div>
       </div>
     </div>
+    <div>
+      <modal-article-component
+        :dialogArticle="dialogArticle"
+        :articleObj="articleDetails"
+        @closeDialog="closeDialog"
+      />
+    </div>
   </div>
 </template>
 <script>
+import ModalArticleComponent from "./ModalArticleComponent.vue";
+
 export default {
+  components: { ModalArticleComponent },
   name: "CardListComponent",
+  data() {
+    return {
+      reRender: 0,
+      dialogArticle: false,
+      articleDetails: {},
+    };
+  },
   props: {
     articleObj: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    openDetailsArticle(articleObj) {
+      this.articleDetails = articleObj;
+      this.dialogArticle = true;
+    },
+    closeDialog() {
+      this.dialogArticle = false;
     },
   },
   filters: {
