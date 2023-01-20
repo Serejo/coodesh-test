@@ -67,7 +67,7 @@ export default {
     articles: [],
     page: 1,
     PerPage: 10,
-    sort: "",
+    sort: "%3ADesc",
   }),
   mounted: function () {
     this.loadData();
@@ -93,6 +93,7 @@ export default {
         });
     },
     loadData() {
+      this.sort = "";
       fetch(
         `https://api.spaceflightnewsapi.net/v3/articles?_limit=${this.PerPage}&_start=${this.page}`
       )
@@ -100,6 +101,7 @@ export default {
         .then((json) => {
           this.articles = json;
         });
+      this.clearSort();
     },
     sortArticle(sort) {
       this.sort = sort;
@@ -110,6 +112,9 @@ export default {
         .then((json) => {
           this.articles = json;
         });
+    },
+    clearSort() {
+      this.sort = "%3ADesc";
     },
   },
 };
