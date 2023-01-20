@@ -55,7 +55,7 @@
         <img
           :src="articleObj.imageUrl"
           alt=""
-          class="h-48 object-cover md:h-full md:w-48"
+          class="h-48 object-cover md:h-full md:w-48 sm:h-auto sm:w-auto"
         />
       </div>
     </div>

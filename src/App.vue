@@ -3,7 +3,11 @@
     <div class="w-full px-5">
       <header-list-component class="" />
       <div class="grid-cols-1" v-for="(article, i) in articles" :key="i">
-        <card-list-component :article-obj="article" v-if="i % 2 == 0" />
+        <card-list-component
+          :article-obj="article"
+          v-if="i % 2 == 0"
+          class="my-10"
+        />
 
         <card-list-component-inverted :article-obj="article" v-else />
       </div>
