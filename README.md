@@ -6,6 +6,14 @@ This is a challenge by [Coodesh](https://coodesh.com/)
 
 Neste desafio proposto pela Codeesh eu foquei em utilizar Vue.Js 2 com Tailwind CSS. Nele você irá poder pesquisar as noticias e artigos do Space Flight News por ordem de data, e por busca por título de artigo.
 
+## 🧪 Tecnologias
+
+Esse projeto foi desenvolvido com as seguintes tecnologias:
+
+- [Vue](https://vuejs.org/)
+- [Tailwindcss](https://tailwindcss.com)
+- [PostCss](https://postcss.org/)
+
 ## 🚀 Como executar
 
 Clone o repositório e acesse a pasta.
@@ -23,15 +31,6 @@ $ npm install
 
 # Iniciar o projeto
 $ npm run serve
-
-
-A aplicação pode ser acessada em [`localhost:8000`](http://localhost:8000).
 ```
 
-## 🧪 Tecnologias
-
-Esse projeto foi desenvolvido com as seguintes tecnologias:
-
-- [Vue](https://vuejs.org/)
-- [Tailwindcss](https://tailwindcss.com)
-- [PostCss](https://postcss.org/)
+A aplicação pode ser acessada em [`localhost:8000`](http://localhost:8000).
