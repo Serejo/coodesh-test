@@ -15,28 +15,32 @@
       <div class="flex items-center justify-between mr-3">
         <form>
           <div class="relative">
-            <input
-              type="search"
-              id="default-search"
-              class="
-                block
-                w-full
-                p-2
-                pl-4
-                text-sm text-gray-900
-                border border-gray-300
-                rounded-lg
-                bg-gray-50
-                dark:bg-gray-700
-                dark:border-gray-600
-                dark:placeholder-gray-400
-                dark:text-white
-              "
-              placeholder="Search"
-              required
-            />
+            <label class="block" for="id">
+              <input
+                type="text"
+                id="id"
+                v-model="search"
+                class="
+                  block
+                  w-full
+                  p-2
+                  pl-4
+                  text-sm text-gray-900
+                  border border-gray-300
+                  rounded-lg
+                  bg-gray-50
+                  dark:bg-gray-700
+                  dark:border-gray-600
+                  dark:placeholder-gray-400
+                  dark:text-white
+                "
+                placeholder="Search"
+                required
+              />
+            </label>
+
             <button
-              type="submit"
+              type="button"
               class="
                 text-white
                 absolute
@@ -51,6 +55,7 @@
                 px-1
                 py-1
               "
+              @click="searchArticle()"
             >
               <svg
                 aria-hidden="true"
@@ -212,7 +217,14 @@
 <script>
 export default {
   name: "HeaderListComponent",
-  data: () => ({}),
+  data: () => ({
+    search: "",
+  }),
+  methods: {
+    searchArticle() {
+      this.$emit("serchArticleByTitle", this.search);
+    },
+  },
 };
 </script>
 <style>

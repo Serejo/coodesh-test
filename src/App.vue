@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <div class="w-full px-5">
-      <header-list-component class="" />
+      <header-list-component
+        class=""
+        @serchArticleByTitle="serchArticleByTitle"
+      />
       <div class="grid-cols-1" v-for="(article, i) in articles" :key="i">
         <card-list-component
           :article-obj="article"
@@ -81,6 +84,15 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           this.articles = this.articles.concat(json);
+        });
+    },
+    serchArticleByTitle(title) {
+      fetch(
+        `https://api.spaceflightnewsapi.net/v3/articles?_limit=${this.PerPage}&_start=${this.page}&title_contains=${title}`
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          this.articles = json;
         });
     },
   },
