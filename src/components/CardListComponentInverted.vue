@@ -4,7 +4,7 @@
       max-w-md
       mx-auto
       bg-white
-      rounded-xl
+      rounded-md
       shadow-md
       overflow-hidden
       md:max-w-2xl
@@ -27,8 +27,8 @@
             {{ articleObj.newsSite }}
           </div>
         </div>
-        <div class="text-start">{{ articleObj.summary }}</div>
-        <div class="text-start">
+        <div class="text-end">{{ articleObj.summary }}</div>
+        <div class="text-end">
           <button
             :href="articleObj.url"
             type="button"
@@ -42,7 +42,7 @@
               text-sm
               px-5
               py-2.5
-              mr-2
+              ml-2
               mb-2
             "
             @click="openDetailsArticle(articleObj)"

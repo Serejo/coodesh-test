@@ -4,7 +4,7 @@
       max-w-md
       mx-auto
       bg-white
-      rounded-xl
+      rounded-md
       shadow-md
       overflow-hidden
       md:max-w-2xl

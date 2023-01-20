@@ -11,6 +11,38 @@
 
         <card-list-component-inverted :article-obj="article" v-else />
       </div>
+      <div
+        class="
+          my-10
+          flex flex-col
+          justify-center
+          gap-4
+          items-center
+          text-center
+        "
+        v-if="articles.length"
+      >
+        <div class="w-4 h-4 bg-gray-300 border-gray-400 border-2"></div>
+        <div class="w-4 h-4 bg-gray-300 border-gray-400 border-2"></div>
+        <div class="w-4 h-4 bg-gray-300 border-gray-400 border-2"></div>
+        <button
+          type="button"
+          class="
+            text-purple-500
+            border border-purple-500
+            focus:outline-none
+            hover:bg-gray-300
+            rounded-md
+            text-sm
+            px-5
+            py-2.5
+            mt-3
+          "
+          @click="loadMore()"
+        >
+          Carregar Mais
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -28,13 +60,29 @@ export default {
   },
   data: () => ({
     articles: [],
+    page: 1,
+    PerPage: 10,
   }),
   mounted: function () {
-    fetch("https://api.spaceflightnewsapi.net/v3/articles")
+    fetch(
+      `https://api.spaceflightnewsapi.net/v3/articles?_limit=${this.PerPage}&_start=${this.page}`
+    )
       .then((response) => response.json())
       .then((json) => {
         this.articles = json;
       });
+  },
+  methods: {
+    loadMore() {
+      this.page += this.PerPage;
+      fetch(
+        `https://api.spaceflightnewsapi.net/v3/articles?_limit=${this.PerPage}&_start=${this.page}`
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          this.articles = this.articles.concat(json);
+        });
+    },
   },
 };
 </script>
