@@ -4,6 +4,8 @@
       <header-list-component
         class=""
         @serchArticleByTitle="serchArticleByTitle"
+        @loadData="loadData"
+        @sortArticle="sortArticle"
       />
       <div class="grid-cols-1" v-for="(article, i) in articles" :key="i">
         <card-list-component
@@ -65,21 +67,16 @@ export default {
     articles: [],
     page: 1,
     PerPage: 10,
+    sort: "",
   }),
   mounted: function () {
-    fetch(
-      `https://api.spaceflightnewsapi.net/v3/articles?_limit=${this.PerPage}&_start=${this.page}`
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        this.articles = json;
-      });
+    this.loadData();
   },
   methods: {
     loadMore() {
       this.page += this.PerPage;
       fetch(
-        `https://api.spaceflightnewsapi.net/v3/articles?_limit=${this.PerPage}&_start=${this.page}`
+        `https://api.spaceflightnewsapi.net/v3/articles?_limit=${this.PerPage}&_start=${this.page}&_sort=publishedAt${this.sort}`
       )
         .then((response) => response.json())
         .then((json) => {
@@ -89,6 +86,25 @@ export default {
     serchArticleByTitle(title) {
       fetch(
         `https://api.spaceflightnewsapi.net/v3/articles?_limit=${this.PerPage}&_start=${this.page}&title_contains=${title}`
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          this.articles = json;
+        });
+    },
+    loadData() {
+      fetch(
+        `https://api.spaceflightnewsapi.net/v3/articles?_limit=${this.PerPage}&_start=${this.page}`
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          this.articles = json;
+        });
+    },
+    sortArticle(sort) {
+      this.sort = sort;
+      fetch(
+        `https://api.spaceflightnewsapi.net/v3/articles?_limit=${this.PerPage}&_start=${this.page}&_sort=publishedAt${sort}`
       )
         .then((response) => response.json())
         .then((json) => {

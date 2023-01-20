@@ -13,6 +13,13 @@
   >
     <div class="flex items-center justify-between">
       <div class="flex items-center justify-between mr-3">
+        <button
+          v-if="selectedOption != 'Sort'"
+          class="bg-red-600 rounded px-2 py-0.5 mr-3"
+          @click="clearSelection"
+        >
+          x
+        </button>
         <form>
           <div class="relative">
             <label class="block" for="id">
@@ -76,33 +83,25 @@
           </div>
         </form>
       </div>
-      <div>
+      <div class="relative">
         <button
-          id="dropdown-button"
-          data-dropdown-toggle="dropdown"
           class="
-            flex-shrink-0
             z-10
             inline-flex
             items-center
             py-2.5
-            px-4
+            px-11
             text-sm
             font-medium
-            text-center text-gray-900
+            text-start text-gray-900
             bg-gray-100
             border border-gray-300
             rounded-lg
-            hover:bg-gray-200
-            dark:bg-gray-700
-            dark:hover:bg-gray-600
-            dark:focus:ring-gray-700
-            dark:text-white
-            dark:border-gray-600
           "
           type="button"
+          @click="toggleMenu"
         >
-          Sort
+          {{ selectedOption }}
           <svg
             aria-hidden="true"
             class="w-4 h-4 ml-1"
@@ -118,99 +117,31 @@
           </svg>
         </button>
         <div
-          id="dropdown"
           class="
+            absolute
             z-10
-            hidden
             bg-white
-            divide-y divide-gray-100
             rounded
             shadow
-            w-44
-            dark:bg-gray-700
+            w-full
+            py-2
+            hover:bg-gray-100
+            dark:hover:bg-gray-600 dark:hover:text-white
           "
-          data-popper-reference-hidden=""
-          data-popper-escaped=""
-          data-popper-placement="top"
-          style="
-            position: absolute;
-            inset: auto auto 0px 0px;
-            margin: 0px;
-            transform: translate3d(897px, 5637px, 0px);
-          "
+          v-if="!isVisible"
         >
-          <ul
-            class="py-1 text-sm text-gray-700 dark:text-gray-200"
-            aria-labelledby="dropdown-button"
-          >
-            <li>
-              <button
-                type="button"
-                class="
-                  inline-flex
-                  w-full
-                  px-4
-                  py-2
-                  hover:bg-gray-100
-                  dark:hover:bg-gray-600 dark:hover:text-white
-                "
-              >
-                Mockups
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                class="
-                  inline-flex
-                  w-full
-                  px-4
-                  py-2
-                  hover:bg-gray-100
-                  dark:hover:bg-gray-600 dark:hover:text-white
-                "
-              >
-                Templates
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                class="
-                  inline-flex
-                  w-full
-                  px-4
-                  py-2
-                  hover:bg-gray-100
-                  dark:hover:bg-gray-600 dark:hover:text-white
-                "
-              >
-                Design
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                class="
-                  inline-flex
-                  w-full
-                  px-4
-                  py-2
-                  hover:bg-gray-100
-                  dark:hover:bg-gray-600 dark:hover:text-white
-                "
-              >
-                Logos
-              </button>
+          <ul>
+            <li
+              class="border-b-2 border-gray-200 py-1 px-0 cursor-pointer"
+              v-for="(option, i) in options"
+              @click="selectOption(option)"
+              :key="i"
+            >
+              {{ option }}
             </li>
           </ul>
         </div>
       </div>
-
-      <div>
-        <img src="" alt="" />
-      </div>
-      <div class=""></div>
     </div>
   </header>
 </template>
@@ -219,10 +150,31 @@ export default {
   name: "HeaderListComponent",
   data: () => ({
     search: "",
+    options: ["Mais Antigas", "Mais Novas"],
+    selectedOption: "Sort",
+    isVisible: true,
   }),
   methods: {
     searchArticle() {
       this.$emit("serchArticleByTitle", this.search);
+    },
+    selectOption(option) {
+      if (option == "Mais Antigas") {
+        this.selectedOption = "Mais Antigas";
+        this.isVisible = !this.isVisible;
+        this.$emit("sortArticle", "%3AAsc");
+      } else {
+        this.selectedOption = "Mais Novas";
+        this.isVisible = !this.isVisible;
+        this.$emit("sortArticle", "%3ADesc");
+      }
+    },
+    toggleMenu() {
+      this.isVisible = !this.isVisible;
+    },
+    clearSelection() {
+      this.selectedOption = "Sort";
+      this.$emit("loadData");
     },
   },
 };
